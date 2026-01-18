@@ -7,9 +7,9 @@
 <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark"
     style="background-image: url({{blog.featured_image.url}});background-blend-mode: overlay;background-size:cover;">
     <div class="col-md-8 px-0">
-        <h1 class="display-4 font-italic">{{blog.title}}</h1>
+        <h1 class="display-4 font-italic"><a href="{% url 'blogs' blog.slug %}" class="text-dark">{{blog.title}}</a></h1>
         <p class="lead my-3">{{blog.short_description | truncatewords:20}}</p>
-        <a href="#" class="btn btn-sm btn-warning">Read More</a>
+        <a href="{% url 'blogs' blog.slug %}" class="btn btn-sm btn-warning">Read More</a>
     </div>
 </div>
 {% endif %}
@@ -22,11 +22,12 @@
     <div class="col-md-6">
         <div class="card border-0">
             <div class="card-body">
-                <h3>{{blog.title}}</h3>
-                <small class="mb-1 text-muted">{{blog.created_at | timesince}} ago by <a
-                        href="#">{{blog.author}}</a></small>
+                <h3><a href="{% url 'blogs' blog.slug %}" class="text-dark">{{blog.title}}</a></h3>
+                <small class="mb-1 text-muted">{{blog.created_at | timesince}} ago by 
+                    <a href="{% url 'blogs' blog.slug %}">{{blog.author}}</a>
+                </small>
                 <p class="card-text">{{blog.short_description | truncatewords:20}}</p>
-                <a href="#" class="btn btn-sm btn-warning">Read More</a>
+                <a href="{% url 'blogs' blog.slug %}" class="btn btn-sm btn-warning">Read More</a>
             </div>
         </div>
     </div>

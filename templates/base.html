@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trading World</title>
+    <title>Trending World</title>
     <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <link href=" {% static 'css/blog.css' %} " rel="stylesheet">
@@ -19,7 +19,7 @@
         <header class="blog-header py-3">
             <div class="row flex-nowrap justify-content-between align-items-center">
                 <div class="col-8 pt-1">
-                    <a class="blog-header-logo text-dark" href="/">Trading World</a>
+                    <a class="blog-header-logo text-dark" href="/">Trending World</a>
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
                     <a class="btn btn-sm btn-warning" href="#">Login</a> &nbsp;
@@ -31,11 +31,18 @@
         <div class="nav-scroller py-1 mb-2">
             <nav class="nav d-flex justify-content-between">
                 {% for category in categories %}
-                <a class="p-2 text-muted" href="{% url 'blog_by_category' category.id %}">{{ category.category_name }}</a>
+                <a class="p-2 text-muted" href="{% url 'blog_by_category' category.id %}">{{ category.category_name}}</a>
                 {% endfor %}
             </nav>
         </div>
-
+        <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
+            <form action="{% url 'search' %}" method="get">
+                <div class="input-group" style="width: 100%; margin-bottom: 10px;">
+                    <input style="margin-right: 10px; border-radius: 5px;" class="form-control" type="text"name="keyword" value="{{keyword}}" placeholder="Search...">
+                    <button type="submit" class="btn btn-sm btn-warning">Search</button>
+                </div>
+            </form>
+        </div>
 
         <!-- Main Content -->
 
@@ -47,7 +54,7 @@
         <!-- Footer Part  -->
 
         <footer class="blog-footer">
-            <p>Trading World Built with ❤️ by <a href="#">Rahat Ali</a></p>
+            <p>Trending World Built with ❤️ by <a href="#">Rahat Ali</a></p>
         </footer>
 </body>
 

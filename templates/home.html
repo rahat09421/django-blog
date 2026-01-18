@@ -6,25 +6,25 @@
 <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark"
   style="background-image: url({{blog.featured_image.url}});background-blend-mode: overlay;background-size:cover;">
   <div class="col-md-8 px-0">
-    <h1 class="display-4 font-italic">{{blog.title}}</h1>
+    <h1 class="display-4 font-italic"> {{blog.title}}</h1>
     <p class="lead my-3">{{blog.short_description | truncatewords:20}}</p>
-    <a href="#" class="btn btn-sm btn-warning">Read More</a>
+    <a href="{% url 'blogs' blog.slug %}" class="btn btn-sm btn-warning">Read More</a>
   </div>
 </div>
 {% endif %}
 {% endfor %}
 
-<h3 class="text-uppercase text-warning " style="letter-spacing: 2px;">Featured Blogs</h3>
+<h3  class="text-uppercase text-warning " style="letter-spacing: 2px;">Featured Blogs</h3>
 <div class="row mb-2">
   {% for blog in featured_blogs %}
   {% if not forloop.first %}
   <div class="col-md-6">
     <div class="card border-0">
       <div class="card-body">
-        <h3>{{blog.title}}</h3>
+        <h3> <a href="{% url 'blogs' blog.slug %}" class="text-dark">{{blog.title}}</a></h3>
         <small class="mb-1 text-muted">{{blog.created_at | timesince}} ago by <a href="#">{{blog.author}}</a></small>
         <p class="card-text">{{blog.short_description | truncatewords:20}}</p>
-        <a href="#" class="btn btn-sm btn-warning">Read More</a>
+        <a href="{% url 'blogs' blog.slug %}" class="btn btn-sm btn-warning">Read More</a>
       </div>
     </div>
   </div>
@@ -39,10 +39,10 @@
     <div class="col-md-8 blog-main">
       {% for blog in blogs %}
       <div class="blog-post">
-        <h2 class="blog-post-title">{{blog.title}}</h2>
+        <h3 class="blog-post-title"><a href="{% url 'blogs' blog.slug %}" class="text-dark">{{blog.title}}</a></h3>
         <p class="blog-post-meta">{{blog.created_at | timesince}} ago by <a href="#">{{blog.author}}</a></p>
         <p>{{blog.short_description | truncatewords:20}}</p>
-        <a href="#" class="btn btn-sm btn-warning">Read More</a>
+        <a href="{% url 'blogs' blog.slug %}" class="btn btn-sm btn-warning">Read More</a>
       </div>
       <!-- /.blog-post -->
       {% endfor %}
@@ -50,17 +50,19 @@
     <!-- /.blog-main -->
     <aside class="col-md-4 blog-sidebar">
       <div class="p-3 mb-3 bg-light rounded">
-        <h4 class="font-italic">About</h4>
-        <p class="mb-0">Trading World is a blog where you can find the latest news and updates about the stock market.
-          Follow us for more updates. </p>
+        <h4 class="font-italic">{{about.about_heading}}</h4>
+        <p class="mb-0">{{about.about_body}}</p>
       </div>
+      {% if social_links %}
       <div class="p-3">
         <h4 class="font-italic">Follow Us</h4>
         <ol class="list-unstyled">
-          <li><a href="#">GitHub</a></li>
-          <li><a href="#">LinkedIn</a></li>
+          {% for social_link in social_links %}
+          <li><a href="{{social_link.link}}" target="_blank">{{social_link.platform}}</a></li>
+          {% endfor %}
         </ol>
       </div>
+      {% endif %}
     </aside><!-- /.blog-sidebar -->
   </div><!-- /.row -->
 </main><!-- /.container -->
